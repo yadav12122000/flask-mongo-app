@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+    Update-Page
+{% endblock title %}
+{% block body %}
+<body style="background: rgb(169, 224, 224);">
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/get_data">Back</a>
+    </div>
+    
+    <div style="padding: 10px;">
+      <h1 style="background: darkcyan; font-weight: bolder; text-align: center;">M.B. Sr. Sec. School</h1>
+    </br>
+   </div>
+   <form method="POST">
+    <div id="container">
+      <h2 style="font-weight: bold;">Please fill for Update the details</h2>
+    </br></br>
+    <label for="std_name"><b>Name</b></label>
+      <input class="input_box" id="std_name" type="text" placeholder="Please enter Student Name" name="std_name" required>
+    </br></br>
+    <label for="std_age "><b>Age</b></label>
+      <input class="input_box" id="std_age" type="number" placeholder="Please enter Age" name="std_age" required>
+    </br></br>
+    <label for="std_email"><b>Email address</b></label>
+      <input class="input_box" id="std_email" type="email" placeholder="Please enter email address" name="std_email" required>
+    </br></br></br>
+      <button id="myButton" type="submit" class="btn"><b>Submit</b></button>
+
+    </div>
+  </form>
+  </body>
+{% endblock body %}

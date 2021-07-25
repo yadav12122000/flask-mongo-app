@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.button {
+  background-color:white;
+  margin: 5px;
+  text-decoration-color: black;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: large;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.search-container button {
+      float: right;
+      padding: 6px 10px;
+      margin-top: 8px;
+      margin-right: 16px;
+      background: darkcyan;
+      font-size: 17px;
+      border: none;
+      cursor: pointer;
+}
+
+    .search-container {
+      float: right;
+    }
+    .search-container button:hover {
+      background: darkcyan;
+    }
+     
+      .search-container button {
+        float: right;
+        display: block;
+        text-align: center;
+      
+        margin: 0;
+        padding: 14px;
+      }
+</style> 
+</head>
+<body>
+<div class="search-container">
+  <input id="livebox" type="text"  style="width: auto; height: 40px;" type="text" placeholder="Search..." name="search">
+    <button  type="submit"><i class="fa fa-search"></i></button>
+</div>
+<table id="datalist">
+<tr>
+  <th>S No</th>
+  <th>Name</th>
+  <th>Age</th>
+  <th>Email ID</th>
+</tr>
+{% for student in students %}
+<tr>
+  <td>{{ loop.index }}</td>
+  <td>{{ student.name }}</td>
+  <td>{{student.age}}</td>
+  <td>{{student.email}}</td>
+  <td><a href="/replace_student/{{student.name}}-{{student.email}}" type="button" class="button">Update</button>
+    <a href="/delete_student/{{student.name}}-{{student.email}}" type="button" class="button">Delete</button>
+  </td>
+</tr>
+{% endfor %}
+</table>
+</body>
+
+  <script>
+    $(document).ready(function(){
+        $("#livebox").on("input",function(e){
+            $("#datalist").empty();
+            $.ajax({
+                method:"post",
+                url:"/livesearch",
+                data:{text:$("#livebox").val()},
+                success:function(res){
+                    var data = "<table><tr><th>Name</th><th>Age</th><th>Email ID</th></tr>";
+                    // console.log(res[0]['name']);
+                    $.each(res,function(index,value){
+                         data += "<tr><td>"+value.name+"</td><td>"+value.age+"</td><td>"+value.email+"</td></tr>";
+
+                    });
+                    data += "</table>";
+                    $("#datalist").html(data);
+                }
+            });
+        });
+    });
+  </script>
+  </html>
