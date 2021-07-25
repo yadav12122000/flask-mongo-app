@@ -1,6 +1,7 @@
 Flask App
 ---------
 This app is for the students data collection in a school
+
 Features:
 ---------
 1. Store their name , age ,  email address etc.
